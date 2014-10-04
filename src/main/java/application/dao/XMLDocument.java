@@ -7,41 +7,27 @@ import org.xml.sax.XMLReader;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * Created by ruogu on 10/4/14.
  */
 public class XMLDocument extends GenericDocument {
-    @Override
-    public StringBuffer generate(Document srcDoc) {
-        return null;
-    }
 
     @Override
-    public void setHeader(String header) {
-        try {
-            SAXParserFactory spf = SAXParserFactory.newInstance();
-            spf.setNamespaceAware(true);
-            SAXParser saxParser = spf.newSAXParser();
-            XMLReader xmlReader = saxParser.getXMLReader();
-            xmlReader.setContentHandler(new DocumentHandler());
-            xmlReader.parse(new InputSource(header));
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String generate() {
+        // first filter the data
+         return null;
     }
+
 
     @Override
     public void setContent(String content) {
+        // we use XML to represent all the datas
         parserXml(content);
+        this.mContent = content;
     }
 
     private void parserXml(String content) {
@@ -49,9 +35,8 @@ public class XMLDocument extends GenericDocument {
             SAXParserFactory spf = SAXParserFactory.newInstance();
             spf.setNamespaceAware(true);
             SAXParser saxParser = spf.newSAXParser();
-            XMLReader xmlReader = saxParser.getXMLReader();
-            xmlReader.setContentHandler(new DocumentHandler());
-            xmlReader.parse(new InputSource(content));
+            saxParser.parse(new InputSource(new ByteArrayInputStream(content.getBytes("utf-8"))),
+                    new DocumentHandler());
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (SAXException e) {

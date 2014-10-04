@@ -2,19 +2,14 @@ package main.java.application.dao;
 
 import main.java.application.constants.MetaFlags;
 import main.java.application.constants.SortType;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
 
 /**
  * All the documents contain similar internal data structure
  */
 public abstract class GenericDocument implements Document {
-    private Map<String, MetaFlags> mDocStore;
-
+    protected Map<String, MetaFlags> mDocStore;
+    protected String mContent;
 
 
     @Override
@@ -35,8 +30,8 @@ public abstract class GenericDocument implements Document {
 
         if(metaFlags == null) {
             metaFlags = new MetaFlags();
-
         }
+
         metaFlags.filterStr = fieldStr;
         mDocStore.put(fieldName, metaFlags);
     }
