@@ -29,10 +29,23 @@ public abstract class GenericDocument implements BaseDocument {
     protected List<Map<String, String>> mRawData;
     protected  List<Map<String, String>> mProcessedData;
 
-    GenericDocument() {
+    public GenericDocument() {
         mFieldsToFilter = new HashMap<String, String>();
         mFieldsToSort = new ArrayList<Pair>();
         mRawData = new ArrayList<Map<String, String>>();
+        mProcessedData = new ArrayList<Map<String, String>>();
+    }
+
+    public GenericDocument(GenericDocument gc) {
+        this.mFieldsToSort = gc.mFieldsToSort;
+        this.mFieldsToFilter = gc.mFieldsToFilter;
+        this.mRawData = gc.mRawData;
+        this.mProcessedData = gc.mProcessedData;
+    }
+
+    public void clearRules() {
+        mFieldsToFilter = new HashMap<String, String>();
+        mFieldsToSort = new ArrayList<Pair>();
         mProcessedData = new ArrayList<Map<String, String>>();
     }
 
@@ -44,7 +57,7 @@ public abstract class GenericDocument implements BaseDocument {
             Iterator it = mFieldsToFilter.entrySet().iterator();
             while(it.hasNext()) {
                 Map.Entry entry = (Map.Entry) it.next();
-                if(!dataMap.get(entry.getKey()).equals((String) entry.getValue())) {
+                if(!dataMap.get(entry.getKey()).equals(entry.getValue())) {
                     satisfyFilter = false;
                     break;
                 }

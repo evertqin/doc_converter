@@ -11,6 +11,14 @@ import java.util.*;
  * Created by ruogu on 10/4/14.
  */
 public class CSVDocument extends GenericDocument {
+    public  CSVDocument(){
+        super();
+    }
+
+    public CSVDocument(GenericDocument gc) {
+        super(gc);
+    }
+
     @Override
     public void parse(String content) {
         String[] lines = content.split("[\\r\\n]+");

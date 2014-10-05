@@ -1,0 +1,9 @@
+Build:
+Standard Java Build in Intellij, didn't use 3rd Libraries.
+
+Use:
+All results are output to standard out, but it is easy to adapt the OutStream to other streambuffers.
+
+Trade Offs:
+1. Could use XSLT to do the sorting and filtering and use XML as internal data structure to represent the data. I don't have time to test it but I believe it is feasible.
+2. Should have used SAX to generate XML as DOM is slower and consumes more memory.

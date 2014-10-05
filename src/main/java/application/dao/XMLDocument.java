@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -40,6 +38,10 @@ public class XMLDocument extends GenericDocument {
         levelTags.put(0, "Site");
         levelTags.put(1, "Hosts");
         levelTags.put(2, "Host");
+    }
+
+    public XMLDocument(GenericDocument gc) {
+        super(gc);
     }
 
     @Override
@@ -126,10 +128,10 @@ public class XMLDocument extends GenericDocument {
             loadAvg1MinElement.setTextContent(curr.get(DocumentHeaders.LOAD_AVG_1MIN));
             hostNode.appendChild(loadAvg1MinElement);
             Element loadAvg5MinElement = doc.createElement("Load_avg_5min");
-            loadAvg1MinElement.setTextContent(curr.get(DocumentHeaders.LOAD_AVG_5MIN));
+            loadAvg5MinElement.setTextContent(curr.get(DocumentHeaders.LOAD_AVG_5MIN));
             hostNode.appendChild(loadAvg5MinElement);
             Element loadAvg15MinElement = doc.createElement("Load_avg_15min");
-            loadAvg1MinElement.setTextContent(curr.get(DocumentHeaders.LOAD_AVG_15MIN));
+            loadAvg15MinElement.setTextContent(curr.get(DocumentHeaders.LOAD_AVG_15MIN));
             hostNode.appendChild(loadAvg15MinElement);
             if(next == null || curr.get(DocumentHeaders.SITE_ID) != next.get(DocumentHeaders.SITE_ID)) {
                 return indexOnList + 1;
