@@ -18,7 +18,7 @@ public class DocumentIO {
             StringBuffer sb = new StringBuffer();
             String line = null;
             while ((line = reader.readLine()) != null) {
-                sb.append(line);
+                sb.append(line + '\n');
             }
             return sb.toString();
         } catch (IOException e) {
